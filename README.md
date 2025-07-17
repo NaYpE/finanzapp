@@ -23,6 +23,7 @@ finanzapp/
 ├── cmd/
 ├── config/
 ├── controllers/
+├── dto/
 ├── handlers/
 ├── middleware/
 ├── models/
@@ -31,7 +32,7 @@ finanzapp/
 ├── server/
 ├── services/
 ├── tests/
-├── database/
+├── utils/
 ├── go.mod
 ├── .env
 └── README.md

@@ -4,6 +4,7 @@ import (
 	"finanzapp/config"
 	"finanzapp/dto"
 	"finanzapp/models"
+	"finanzapp/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -46,6 +47,14 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// Aquí podrías guardar sesión o JWT. Por ahora, redireccionamos:
+	token, err := utils.GenerateJWT(user.ID)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "login.html", gin.H{"error": "Error generando token"})
+		return
+	}
+
+	// Guardar token en cookie segura
+	c.SetCookie("Authorization", token, 3600*24, "/", "", false, true)
 	c.Redirect(http.StatusFound, "/dashboard")
+
 }
