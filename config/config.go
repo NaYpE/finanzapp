@@ -1,6 +1,7 @@
 package config
 
 import (
+	"finanzapp/models"
 	"fmt"
 	"log"
 	"os"
@@ -36,7 +37,7 @@ func ConnectDatabase() {
 
 	DB = db
 	if DB != nil {
-
 		log.Println("✅ Conexión a la base de datos establecida")
 	}
+	DB.AutoMigrate(&models.User{})
 }
