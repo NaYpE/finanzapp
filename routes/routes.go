@@ -22,4 +22,8 @@ func RegisterWebRoutes(router *gin.Engine) {
 	router.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", nil)
 	})
+
+	router.GET("/mysql", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "mysql.html", nil)
+	})
 }

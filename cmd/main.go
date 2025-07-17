@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
+	"finanzapp/config"
 	"finanzapp/routes"
 )
 
@@ -19,7 +20,8 @@ func main() {
 	}
 
 	// Conexión a BD
-	//config.ConnectDatabase()
+	config.ConnectDatabase()
+	//database.Connection()
 
 	router := gin.Default()
 
@@ -35,7 +37,7 @@ func main() {
 	// Puerto
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8181"
+		port = "8282"
 	}
 
 	log.Printf("Servidor corriendo en http://localhost:%s", port)
