@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -9,6 +10,7 @@ import (
 
 	"finanzapp/config"
 	"finanzapp/routes"
+	"finanzapp/utils"
 )
 
 func main() {
@@ -33,6 +35,20 @@ func main() {
 
 	// Rutas
 	routes.RegisterWebRoutes(router)
+
+	// 404
+	router.NoRoute(func(c *gin.Context) {
+		token, err := c.Cookie("Authorization")
+		loggedIn := false
+		if err == nil {
+			if _, err := utils.ParseJWT(token); err == nil {
+				loggedIn = true
+			}
+		}
+		c.HTML(http.StatusNotFound, "404.html", gin.H{
+			"loggedIn": loggedIn,
+		})
+	})
 
 	// Puerto
 	port := os.Getenv("PORT")

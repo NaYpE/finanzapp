@@ -9,11 +9,11 @@ FinanzApp es una aplicación que permite a los usuarios llevar el control de sus
 ## 🧩 Tecnologías utilizadas
 
 - Lenguaje: Go (Gin Framework)
-- Base de datos: PostgreSQL
+- Base de datos: MySQL
 - Autenticación: JWT
 - ORM: GORM
 - Frontend: Angular (futuro)
-- Docker (futuro)
+- Docker
 - CI/CD con GitHub Actions (futuro)
 
 ## 📂 Estructura del proyecto
@@ -49,11 +49,12 @@ cd finanzapp
 2. Crea tu archivo `.env` basado en este formato:
 ```env
 DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=tu_password
+DB_PORT=3306
+DB_USER=user
+DB_PASSWORD=password
 DB_NAME=finanzapp
 JWT_SECRET=clave_secreta
+PORT=8181
 ```
 
 3. Corre el proyecto:
@@ -63,7 +64,7 @@ go run cmd/main.go
 
 ## 📅 Roadmap
 
-- [ ] Registro e inicio de sesión con JWT
+- [x] Registro e inicio de sesión con JWT
 - [ ] Manejo de transacciones (ingresos y egresos)
 - [ ] Categorización y reportes
 - [ ] Visualización con gráficos

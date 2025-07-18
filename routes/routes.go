@@ -11,24 +11,24 @@ import (
 
 func RegisterWebRoutes(router *gin.Engine) {
 	// Rutas públicas
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
 	})
 
 	router.POST("/login", controllers.Login)
-	router.GET("/login", func(c *gin.Context) {
+	router.GET("/login", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", nil)
 	})
 
 	router.POST("/signup", controllers.Register)
-	router.GET("/signup", func(c *gin.Context) {
+	router.GET("/signup", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
 		c.HTML(http.StatusOK, "signup.html", nil)
 	})
 
 	router.GET("/logout", controllers.Logout)
 
 	// TODO controller contact
-	router.GET("/contact", func(c *gin.Context) {
+	router.GET("/contact", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", nil)
 	})
 

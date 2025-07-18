@@ -28,3 +28,18 @@ func AuthMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func AlreadyLoggedInMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token, err := c.Cookie("Authorization")
+		if err == nil {
+			// Si el token existe y es válido, redirige al dashboard
+			if _, err := utils.ParseJWT(token); err == nil {
+				c.Redirect(http.StatusFound, "/dashboard")
+				c.Abort()
+				return
+			}
+		}
+		c.Next()
+	}
+}
