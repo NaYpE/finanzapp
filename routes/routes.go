@@ -3,6 +3,7 @@ package routes
 import (
 	"finanzapp/controllers"
 	"finanzapp/middlewares"
+	"finanzapp/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,12 +18,20 @@ func RegisterWebRoutes(router *gin.Engine) {
 
 	router.POST("/login", controllers.Login)
 	router.GET("/login", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login.html", nil)
+		css, msg := utils.GetFlash(c)
+		c.HTML(http.StatusOK, "login.html", gin.H{
+			"flash_css": css,
+			"flash_msg": msg,
+		})
 	})
 
 	router.POST("/signup", controllers.Register)
 	router.GET("/signup", middlewares.AlreadyLoggedInMiddleware(), func(c *gin.Context) {
-		c.HTML(http.StatusOK, "signup.html", nil)
+		css, msg := utils.GetFlash(c)
+		c.HTML(http.StatusOK, "signup.html", gin.H{
+			"flash_css": css,
+			"flash_msg": msg,
+		})
 	})
 
 	router.GET("/logout", controllers.Logout)
@@ -38,7 +47,6 @@ func RegisterWebRoutes(router *gin.Engine) {
 	{
 
 		protected.GET("/dashboard", func(c *gin.Context) {
-
 			claimsInterface, exists := c.Get("claims")
 			if !exists {
 				c.Redirect(http.StatusFound, "/login")
@@ -51,9 +59,13 @@ func RegisterWebRoutes(router *gin.Engine) {
 			if !ok {
 				name = "Usuario" // Valor por defecto
 			}
+			// Mensaje flash
+			css, msg := utils.GetFlash(c)
 
 			c.HTML(http.StatusOK, "dashboard.html", gin.H{
-				"Name": name,
+				"Name":      name,
+				"flash_css": css,
+				"flash_msg": msg,
 			})
 		})
 
