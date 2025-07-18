@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 func RegisterWebRoutes(router *gin.Engine) {
@@ -24,6 +25,8 @@ func RegisterWebRoutes(router *gin.Engine) {
 		c.HTML(http.StatusOK, "signup.html", nil)
 	})
 
+	router.GET("/logout", controllers.Logout)
+
 	// TODO controller contact
 	router.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", nil)
@@ -32,11 +35,31 @@ func RegisterWebRoutes(router *gin.Engine) {
 	// Ruta protegida
 	protected := router.Group("/")
 	protected.Use(middlewares.AuthMiddleware())
+	{
 
-	protected.GET("/dashboard", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "dashboard.html", nil)
-	})
-	protected.GET("/mysql", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "mysql.html", nil)
-	})
+		protected.GET("/dashboard", func(c *gin.Context) {
+
+			claimsInterface, exists := c.Get("claims")
+			if !exists {
+				c.Redirect(http.StatusFound, "/login")
+				return
+			}
+
+			claims := claimsInterface.(jwt.MapClaims)
+
+			name, ok := claims["name"].(string)
+			if !ok {
+				name = "Usuario" // Valor por defecto
+			}
+
+			c.HTML(http.StatusOK, "dashboard.html", gin.H{
+				"Name": name,
+			})
+		})
+
+		protected.GET("/mysql", func(c *gin.Context) {
+			c.HTML(http.StatusOK, "mysql.html", nil)
+		})
+	}
+
 }

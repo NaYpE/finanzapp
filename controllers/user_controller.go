@@ -47,7 +47,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token, err := utils.GenerateJWT(user.ID)
+	token, err := utils.GenerateJWT(user.ID, user.Name)
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "login.html", gin.H{"error": "Error generando token"})
 		return
@@ -56,5 +56,10 @@ func Login(c *gin.Context) {
 	// Guardar token en cookie segura
 	c.SetCookie("Authorization", token, 3600*24, "/", "", false, true)
 	c.Redirect(http.StatusFound, "/dashboard")
+}
 
+func Logout(c *gin.Context) {
+	// Eliminar la cookie del token
+	c.SetCookie("Authorization", "", -1, "/", "", false, true)
+	c.Redirect(http.StatusFound, "/login")
 }

@@ -16,12 +16,15 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		_, err = utils.ParseJWT(token)
+		claims, err := utils.ParseJWT(token)
 		if err != nil {
 			c.Redirect(http.StatusFound, "/login")
 			c.Abort()
 			return
 		}
+
+		// Guardar el ID del usuario en el contexto
+		c.Set("claims", claims)
 		c.Next()
 	}
 }

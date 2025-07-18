@@ -8,3 +8,4 @@ type User struct {
 	Email    string `gorm:"size:100;unique;not null"`
 	Password string `gorm:"not null"`
 }
+type Users []User
