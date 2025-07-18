@@ -33,6 +33,7 @@ finanzapp/
 ├── services/
 ├── tests/
 ├── utils/
+├── validations/
 ├── go.mod
 ├── .env
 └── README.md

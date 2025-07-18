@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"finanzapp/config"
+	"finanzapp/middlewares"
 	"finanzapp/routes"
 	"finanzapp/utils"
 )
@@ -32,6 +33,9 @@ func main() {
 
 	// Cargar templates
 	router.LoadHTMLGlob("templates/*.html")
+
+	// Recupera panics de cualquier handler
+	router.Use(middlewares.ErrorHandler())
 
 	// Rutas
 	routes.RegisterWebRoutes(router)
