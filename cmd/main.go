@@ -8,10 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
-	"finanzapp/config"
-	"finanzapp/middlewares"
-	"finanzapp/routes"
-	"finanzapp/utils"
+	"login-service/config"
+	"login-service/middlewares"
+	"login-service/routes"
+	"login-service/utils"
 )
 
 func main() {

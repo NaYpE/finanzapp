@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"finanzapp/config"
-	"finanzapp/dto"
-	"finanzapp/models"
-	"finanzapp/utils"
-	"finanzapp/validations"
+	"login-service/config"
+	"login-service/dto"
+	"login-service/models"
+	"login-service/utils"
+	"login-service/validations"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

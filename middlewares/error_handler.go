@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"finanzapp/utils"
+	"login-service/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

@@ -1,10 +1,9 @@
-# FinanzApp
-
-Aplicación web para la gestión de finanzas personales.
+# login-service
 
 ## 🧾 Descripción
+Este microservicio se encarga de la autenticación y registro de usuarios.
 
-**FinanzApp** es una aplicación que permite a los usuarios llevar el control de sus ingresos y egresos, gestionar categorías de gastos, visualizar reportes, y mantener sus datos respaldados.
+**login-service** utilizando Go, Gin y JWT. Arquitectura de microservicios, puede ser integrado con otros servicios.
 
 ## 🚀 Funcionalidades actuales
 
@@ -31,7 +30,7 @@ Aplicación web para la gestión de finanzas personales.
 ## 📂 Estructura del proyecto
 
 ```bash
-finanzapp/
+login-service/
 ├── cmd/               # Punto de entrada principal
 ├── config/            # Conexión a la base de datos
 ├── controllers/       # Controladores HTTP
@@ -47,18 +46,39 @@ finanzapp/
 └── README.md
 ```
 
+## Endpoints
+
+### Públicos
+- `GET /signup` – Página de registro
+- `POST /signup` – Registro de usuario
+- `GET /login` – Página de inicio de sesión
+- `POST /login` – Inicio de sesión
+- `GET /logout` – Cierre de sesión
+
+### Protegidos (requieren token JWT)
+- `GET /dashboard` – Dashboard del usuario autenticado
+
 ## 🔒 Seguridad
 
 - JWT tokens firmados y almacenados en cookies HttpOnly
 - Hashing seguro con `bcrypt` para contraseñas
 - Validaciones backend para email y password
 
-## 🛠️ Setup inicial
+## 🛠️ Cómo correr el proyecto
 
+### Variables de entorno esperadas
+- DB_USER
+- DB_PASSWORD
+- DB_NAME
+- DB_HOST
+- DB_PORT
+- JWT_SECRET
+
+### Local
 1. Clona el repositorio
 ```bash
-git clone https://github.com/<tu-usuario>/finanzapp.git
-cd finanzapp
+git clone https://github.com/<tu-usuario>/login-service.git
+cd login-service
 ```
 
 2. Crea tu archivo `.env` basado en este formato:
@@ -67,7 +87,7 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_USER=user
 DB_PASSWORD=password
-DB_NAME=finanzapp
+DB_NAME=login-service
 JWT_SECRET=clave_secreta
 PORT=8181
 ```
@@ -77,6 +97,7 @@ PORT=8181
 go run cmd/main.go
 ```
 
+### Docker
 3.1 Corre el proyecto con docker:
 ```bash
 docker-compose up --build
@@ -86,12 +107,10 @@ Accede en `http://localhost:8181`
 ## 📅 Roadmap
 
 - [x] Registro e inicio de sesión con JWT
-- [ ] Manejo de transacciones (ingresos y egresos)
-- [ ] Categorización y reportes
-- [ ] Visualización con gráficos
-- [ ] Gestión de grupos y conciliación
-- [ ] Exportación/importación de datos
-- [ ] Modo móvil / PWA
+- [ ] Angular
+- [ ] Documentacion
+- [ ] Pruebas
+- [ ] Pipeline
 
 ## 🤝 Contribuciones
 

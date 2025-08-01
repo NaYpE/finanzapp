@@ -3,10 +3,10 @@ version: '3.8'
 services:
   db:
     image: mysql:8
-    container_name: finanzapp_db
+    container_name: login-service_db
     restart: always
     environment:
-      MYSQL_DATABASE: finanzapp
+      MYSQL_DATABASE: login-service
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
@@ -17,7 +17,7 @@ services:
 
   app:
     build: .
-    container_name: finanzapp_app
+    container_name: login-service_app
     restart: always
     ports:
       - "8181:8181"
@@ -29,12 +29,12 @@ services:
       DB_PORT: 3306
       DB_USER: user
       DB_PASSWORD: secret
-      DB_NAME: finanzapp
+      DB_NAME: login-service
       JWT_SECRET: clave_secreta
     volumes:
       - ./templates:/app/templates
     working_dir: /app
-    command: ["./finanzapp"]
+    command: ["./login-service"]
 
 volumes:
   db_data:

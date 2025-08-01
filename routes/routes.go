@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"finanzapp/controllers"
-	"finanzapp/middlewares"
-	"finanzapp/utils"
+	"login-service/controllers"
+	"login-service/middlewares"
+	"login-service/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

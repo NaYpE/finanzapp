@@ -1,12 +1,14 @@
 # 📦 CHANGELOG
 
-Historial de cambios para FinanzApp.
+Historial de cambios para login-service.
 
 # Changelog
 
 ## [v0.1.0] - 2025-07-16
 ### Added
 - Registro de usuarios con validación de correo y contraseña
+- Confirmación de contraseña en registro
+- Verificación de existencia de usuario antes de registrarlo
 - Inicio de sesión con JWT y manejo de sesiones en cookies
 - Middleware de autenticación para rutas protegidas
 - Middleware que redirige si el usuario logueado accede a rutas públicas
@@ -25,6 +27,15 @@ Historial de cambios para FinanzApp.
 - Corrección en la eliminación de cookies tras logout
 - Manejo adecuado de errores al parsear JWT
 
----
+### Improved
+- Limpieza de errores en controladores
+- División por capas (controllers, routes, dto, models, etc.)
+- Redireccionamientos inteligentes según sesión activa
 
-Próxima versión: CRUD de transacciones financieras y visualización con gráficos.
+### Removed
+- Dependencias innecesarias
+
+### To Do
+- Documentación inicial del proyecto
+- Página para "Olvido Contraseña"
+- Mejoar el front/Angular

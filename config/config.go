@@ -1,7 +1,7 @@
 package config
 
 import (
-	"finanzapp/models"
+	"login-service/models"
 	"fmt"
 	"log"
 	"os"

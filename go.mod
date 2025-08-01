@@ -1,4 +1,4 @@
-module finanzapp
+module login-service
 
 go 1.23.0
 
