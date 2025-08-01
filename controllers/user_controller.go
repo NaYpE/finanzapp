@@ -26,8 +26,21 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	var existingUser models.User
+	if err := config.DB.Where("email = ?", input.Email).First(&existingUser).Error; err == nil {
+		utils.SetFlash(c, "alert-warning", "El correo ya está registrado")
+		c.Redirect(http.StatusSeeOther, "/signup")
+		return
+	}
+
 	if !validations.IsValidPassword(input.Password) {
 		utils.SetFlash(c, "alert-warning", "Password inválido")
+		c.Redirect(http.StatusSeeOther, "/signup")
+		return
+	}
+
+	if input.Password != input.ConfirmPassword {
+		utils.SetFlash(c, "alert-warning", "Las contraseñas no coinciden")
 		c.Redirect(http.StatusSeeOther, "/signup")
 		return
 	}

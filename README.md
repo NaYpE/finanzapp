@@ -2,22 +2,9 @@
 
 Aplicación web para la gestión de finanzas personales.
 
-## 🚀 Descripción
+## 🧾 Descripción
 
 **FinanzApp** es una aplicación que permite a los usuarios llevar el control de sus ingresos y egresos, gestionar categorías de gastos, visualizar reportes, y mantener sus datos respaldados.
-
-## 🚀 Funcionalidades actuales
-
-- Registro de usuarios con validaciones robustas
-- Inicio de sesión con autenticación basada en JWT
-- Cierre de sesión (logout) seguro
-- Protección de rutas privadas mediante middleware
-- Prevención de acceso a rutas públicas si ya hay sesión activa
-- Mensajes flash para errores y acciones exitosas
-- Página 404 personalizada
-- Backend con Go (Gin), Frontend con HTML + Bootstrap
-- Base de datos MySQL
-- Contenedores Docker listos para desarrollo y despliegue
 
 ## 🚀 Funcionalidades actuales
 
